@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miftāḥ — Islamisches Schlüsselwörterbuch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#F7F8FB; --card:#FFFFFF; --card-soft:#FAFBFD;
+  --ink:#0F172A; --ink-soft:#475569; --ink-mute:#94A3B8;
+  --border:#E2E8F0; --border-soft:#EEF2F7;
+  --accent:#4F46E5; --accent-soft:#EEF0FF; --accent-hover:#4338CA;
+  --pflicht-bg:#4F46E5; --pflicht-fg:#FFFFFF;
+  --option-bg:#FEF3C7; --option-fg:#92400E;
+  --good-bg:#DCFCE7; --good-fg:#166534;
+  --mid-bg:#FEF3C7; --mid-fg:#854D0E;
+  --bad-bg:#FEE2E2; --bad-fg:#991B1B;
+  --shadow-sm:0 1px 2px rgba(15,23,42,.04),0 1px 1px rgba(15,23,42,.03);
+  --shadow-md:0 4px 6px -1px rgba(15,23,42,.06),0 2px 4px -2px rgba(15,23,42,.04);
+  --shadow-lg:0 10px 15px -3px rgba(15,23,42,.08),0 4px 6px -4px rgba(15,23,42,.05);
+  --radius:14px; --radius-lg:20px;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --arab:'Amiri','Traditional Arabic',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.85);backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border-soft)}
+.topbar-inner{max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+@media (max-width:700px){.topbar-inner{flex-wrap:wrap;padding:10px 14px;gap:10px}}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.02em;color:var(--ink);cursor:pointer;border:none;background:transparent;font-family:inherit}
+.brand-mark{width:32px;height:32px;background:linear-gradient(135deg,#6366F1,#8B5CF6);border-radius:9px;display:grid;place-items:center;color:#fff;font-family:var(--arab);font-size:18px;line-height:1;box-shadow:var(--shadow-md)}
+.search-bar{flex:1;max-width:380px;position:relative}
+.search-bar input{width:100%;padding:9px 14px 9px 38px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;color:var(--ink);outline:none;transition:all .15s}
+.search-bar input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
+.search-bar svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--ink-mute)}
+.topbar-nav{display:flex;gap:2px;background:var(--border-soft);padding:3px;border-radius:10px}
+.topbar-nav button{background:transparent;border:none;padding:7px 12px;border-radius:7px;font-family:inherit;font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:all .15s}
+.topbar-nav button:hover{color:var(--ink)}
+.topbar-nav button.active{background:var(--card);color:var(--ink);box-shadow:var(--shadow-sm)}
+.search-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-lg);padding:6px;display:none;max-height:320px;overflow-y:auto;z-index:60}
+.search-dropdown.open{display:block}
+.search-dropdown-empty{padding:16px;text-align:center;font-size:13px;color:var(--ink-mute)}
+.search-item{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:8px;cursor:pointer}
+.search-item:hover{background:var(--accent-soft)}
+.search-item .ar{font-family:var(--arab);font-size:22px;color:var(--ink);line-height:1;min-width:32px;text-align:center}
+.search-item-meta{display:flex;flex-direction:column;gap:2px}
+.search-item-name{font-weight:600;font-style:italic;font-size:14px}
+.search-item-trans{font-size:12px;color:var(--ink-mute)}
+.shell{max-width:1180px;margin:0 auto;padding:28px 24px 80px}
+@media (max-width:700px){.shell{padding:16px 14px 60px}}
+.with-aside{display:grid;gap:24px}
+@media (min-width:1000px){.with-aside{grid-template-columns:1fr 320px;gap:28px}}
+.notice-banner{background:linear-gradient(135deg,#FEF3C7,#FDE68A);border-radius:var(--radius);padding:14px 18px;font-size:13px;color:var(--option-fg);margin-bottom:16px;line-height:1.5}
+.notice-banner strong{font-weight:700}
+.lemma-status-bar{background:var(--card);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;border:1px solid var(--border-soft);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.lsb-text{font-size:13px;color:var(--ink-soft);line-height:1.5;flex:1;min-width:300px}
+.lsb-progress{display:flex;align-items:center;gap:10px;min-width:200px}
+.lsb-bar{flex:1;height:6px;background:var(--border-soft);border-radius:999px;overflow:hidden}
+.lsb-bar-fill{height:100%;background:linear-gradient(90deg,#6366F1,#8B5CF6);border-radius:999px;transition:width .3s}
+.lsb-pct{font-size:12px;font-weight:700;color:var(--accent);min-width:34px;text-align:right}
+.view-header{margin-bottom:24px}
+.view-title{font-size:28px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
+.view-subtitle{font-size:15px;color:var(--ink-soft)}
+.view{display:none}
+.view.active{display:block}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-mute);margin-bottom:12px}
+.breadcrumb button{color:var(--ink-soft);background:none;border:none;cursor:pointer;font-family:inherit;font-size:inherit;padding:0}
+.breadcrumb button:hover{color:var(--accent)}
+.breadcrumb .sep{opacity:.5}
+.hero{background:var(--card);border-radius:var(--radius-lg);padding:36px 32px;box-shadow:var(--shadow-md);display:grid;gap:24px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:300px;height:300px;background:radial-gradient(circle,rgba(79,70,229,.08) 0%,transparent 70%);pointer-events:none}
+.hero-main{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;position:relative}
+@media (max-width:600px){.hero{padding:28px 22px}.hero-main{grid-template-columns:1fr}}
+.hero-text h1{font-size:48px;font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-bottom:8px}
+.hero-text .pron{font-size:15px;color:var(--ink-mute);font-family:ui-monospace,'SF Mono',Menlo,monospace;margin-bottom:14px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:6px}
+.tag{display:inline-flex;align-items:center;font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);cursor:pointer;border:none;font-family:inherit}
+.tag:hover{background:var(--accent);color:#fff}
+.hero-arab{font-family:var(--arab);font-size:88px;color:var(--ink);line-height:1;direction:rtl;text-align:right;font-weight:400}
+@media (max-width:600px){.hero-arab{font-size:64px;text-align:center}.hero-text h1{font-size:36px}}
+.quick-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding-top:24px;border-top:1px solid var(--border-soft)}
+@media (max-width:700px){.quick-stats{grid-template-columns:1fr}}
+.qstat{display:grid;gap:4px}
+.qstat-label{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-mute)}
+.qstat-value{font-size:14px;font-weight:500;color:var(--ink)}
+.qstat-value .ar{font-family:var(--arab);font-size:17px;margin-right:4px}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 4px 4px}
+.toolbar-title{font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-mute)}
+.filter-pills{display:flex;gap:4px;background:var(--border-soft);padding:3px;border-radius:10px}
+.filter-pills button{border:none;background:transparent;font-family:inherit;font-size:12px;font-weight:600;padding:6px 12px;border-radius:7px;cursor:pointer;color:var(--ink-soft)}
+.filter-pills button.active{background:var(--card);color:var(--ink);box-shadow:var(--shadow-sm)}
+.modules{display:grid;gap:16px}
+.mod-card{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);border:1px solid var(--border-soft);transition:box-shadow .2s;scroll-margin-top:80px}
+.mod-card:hover{box-shadow:var(--shadow-md)}
+.mod-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.mod-head-left{display:flex;align-items:center;gap:14px}
+.mod-num{width:32px;height:32px;background:var(--accent-soft);color:var(--accent);border-radius:10px;display:grid;place-items:center;font-size:14px;font-weight:700}
+.mod-title{font-size:17px;font-weight:600;letter-spacing:-.015em}
+.mod-badge{font-size:10px;font-weight:700;padding:4px 9px;border-radius:6px;letter-spacing:.06em;text-transform:uppercase}
+.mod-badge.pflicht{background:var(--pflicht-bg);color:var(--pflicht-fg)}
+.mod-badge.option{background:var(--option-bg);color:var(--option-fg)}
+.mod-body{font-size:15px;line-height:1.6;color:var(--ink)}
+.mod-body p{margin-bottom:12px}
+.mod-body p:last-child{margin-bottom:0}
+.mod-body strong{font-weight:600}
+.term{font-style:italic;font-weight:500}
+.translation{background:var(--option-bg);color:var(--option-fg);padding:1px 6px;border-radius:4px;font-weight:500;font-size:.95em;white-space:nowrap}
+.ar-inline{font-family:var(--arab);font-size:1.2em;vertical-align:-1px;direction:rtl;display:inline-block;unicode-bidi:isolate}
+body.filter-pflicht .mod-card[data-type="option"]{display:none}
+.form-grid{display:grid;grid-template-columns:max-content 1fr;gap:10px 20px;font-size:14px}
+.form-grid dt{color:var(--ink-mute);font-weight:500}
+.form-grid dd .arab{font-family:var(--arab);font-size:22px;line-height:1;direction:rtl}
+.form-grid dd .mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;background:var(--card-soft);padding:2px 6px;border-radius:4px}
+.quran-card{background:linear-gradient(135deg,#FAFBFD,#F0F2F8);border-radius:12px;padding:16px 18px;margin:14px 0;border-left:3px solid var(--accent)}
+.quran-label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;background:var(--accent);color:#fff;border-radius:5px;margin-bottom:10px}
+.quran-text{font-style:italic;font-size:15px;line-height:1.55}
+.equiv-list{display:grid;gap:10px;margin-top:12px}
+.equiv-row{display:grid;grid-template-columns:200px 1fr auto;gap:16px;padding:14px 16px;background:var(--card-soft);border-radius:10px;align-items:center;font-size:14px}
+@media (max-width:700px){.equiv-row{grid-template-columns:1fr;gap:8px}}
+.equiv-name{font-style:italic;font-weight:600}
+.equiv-desc{color:var(--ink-soft);line-height:1.5}
+.equiv-rating{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;text-align:center}
+.equiv-rating.good{background:var(--good-bg);color:var(--good-fg)}
+.equiv-rating.mid{background:var(--mid-bg);color:var(--mid-fg)}
+.equiv-rating.bad{background:var(--bad-bg);color:var(--bad-fg)}
+.examples{display:grid;gap:12px;margin-top:8px}
+.ex-card{background:var(--card-soft);border-radius:10px;padding:14px 16px;border:1px solid var(--border-soft)}
+.ex-context{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.ex-body{font-size:14px;line-height:1.55}
+.pending{background:var(--card-soft);border-left:3px solid var(--ink-mute);padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-size:13px;color:var(--ink-soft);line-height:1.5}
+.pending strong{color:var(--ink);font-weight:600}
+.aside{display:grid;gap:16px;align-content:start}
+@media (min-width:1000px){.aside{position:sticky;top:80px;align-self:start}}
+.aside-card{background:var(--card);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-sm);border:1px solid var(--border-soft)}
+.aside-title{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:14px}
+.nav-list{list-style:none;display:grid;gap:2px}
+.nav-list button{display:flex;align-items:center;gap:10px;padding:7px 9px;border-radius:7px;background:none;border:none;cursor:pointer;width:100%;text-align:left;font-family:inherit;color:var(--ink-soft);font-size:13px;font-weight:500}
+.nav-list button:hover{background:var(--accent-soft);color:var(--accent)}
+.nav-list .nav-num{width:22px;height:22px;display:grid;place-items:center;font-size:10px;font-weight:700;background:var(--border-soft);border-radius:5px;color:var(--ink-mute)}
+.nav-list button:hover .nav-num{background:var(--accent);color:#fff}
+.nav-list .nav-dot{width:5px;height:5px;border-radius:50%;background:var(--ink-mute);margin-left:auto;opacity:.6}
+.nav-list .nav-dot.pflicht{background:var(--accent);opacity:1}
+.nav-list .nav-arab{font-family:var(--arab);font-size:13px;width:22px;height:22px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border-radius:5px}
+.nav-list button.in-prog{opacity:.75}
+.nav-list .pct-tag{font-size:9px;padding:1px 5px;background:var(--border-soft);color:var(--ink-mute);border-radius:4px;margin-left:auto;font-weight:700}
+.connect-group{margin-bottom:20px}
+.connect-group:last-child{margin-bottom:0}
+.connect-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px}
+.connect-chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;background:var(--card-soft);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:13px;color:var(--ink);font-family:inherit}
+.chip:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.chip.static{cursor:default}
+.chip.static:hover{transform:none;border-color:var(--border);background:var(--card-soft);box-shadow:none}
+.chip .ar{font-family:var(--arab);font-size:17px;line-height:1}
+.chip .name{font-style:italic;font-weight:500}
+.chip .desc{font-size:11px;color:var(--ink-mute);border-left:1px solid var(--border);padding-left:8px}
+.path-card{background:linear-gradient(135deg,#EEF0FF,#F5F0FF);border-radius:var(--radius);padding:20px;border:1px solid var(--border-soft)}
+.path-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.path-node{font-style:italic;font-weight:600;padding:8px 14px;background:var(--card);border-radius:10px;font-size:14px;box-shadow:var(--shadow-sm);border:none;cursor:pointer;font-family:inherit}
+.path-node:hover{transform:translateY(-1px)}
+.path-node.current{background:var(--accent);color:#fff}
+.path-arrow{color:var(--accent);font-weight:700}
+.lemma-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.lemma-card{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow-sm);border:1px solid var(--border-soft);cursor:pointer;transition:all .2s;display:flex;flex-direction:column;gap:14px;text-align:left;font-family:inherit;color:inherit}
+.lemma-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);border-color:var(--accent)}
+.lemma-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.lemma-card-arab{font-family:var(--arab);font-size:40px;line-height:1;color:var(--ink);direction:rtl}
+.lemma-card-status{font-size:10px;font-weight:700;padding:4px 9px;border-radius:6px;letter-spacing:.06em;text-transform:uppercase}
+.lemma-card-status.ready{background:var(--good-bg);color:var(--good-fg)}
+.lemma-card-status.partial{background:var(--mid-bg);color:var(--mid-fg)}
+.lemma-card-name{font-size:22px;font-weight:700;letter-spacing:-.02em}
+.lemma-card-trans{font-size:14px;color:var(--ink-soft);line-height:1.5}
+.lemma-card-bar{height:4px;background:var(--border-soft);border-radius:999px;overflow:hidden;margin-top:4px}
+.lemma-card-bar-fill{height:100%;background:linear-gradient(90deg,#6366F1,#8B5CF6)}
+.lemma-card-fields{display:flex;flex-wrap:wrap;gap:4px;padding-top:8px;border-top:1px solid var(--border-soft)}
+.lemma-card-field{font-size:11px;color:var(--ink-mute);padding:2px 7px;background:var(--card-soft);border-radius:999px}
+.themes-grid{display:grid;gap:16px}
+.theme-card{background:var(--card);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-sm);border:1px solid var(--border-soft)}
+.theme-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border-soft)}
+.theme-title{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.theme-count{font-size:12px;font-weight:600;color:var(--ink-mute);background:var(--card-soft);padding:3px 10px;border-radius:999px}
+.theme-desc{font-size:14px;color:var(--ink-soft);margin-bottom:16px;line-height:1.55}
+.theme-lemmata{display:flex;flex-wrap:wrap;gap:8px}
+.path-list{display:grid;gap:16px}
+.path-card-large{background:var(--card);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);border:1px solid var(--border-soft)}
+.path-card-large-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:12px}
+.path-card-title{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.path-card-large-desc{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-bottom:16px}
+.path-card-large-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.footer{margin-top:40px;padding:20px 0;font-size:12px;color:var(--ink-mute);text-align:center}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <button class="brand" onclick="goView('lexikon')"><div class="brand-mark">م</div><span>Miftāḥ</span></button>
+    <div class="search-bar">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="search-input" placeholder="Begriff suchen…" oninput="onSearch(this.value)" onfocus="onSearch(this.value)" onblur="setTimeout(closeSearch,200)">
+      <div class="search-dropdown" id="search-dropdown"></div>
+    </div>
+    <nav class="topbar-nav">
+      <button id="nav-lexikon" onclick="goView('lexikon')">Lexikon</button>
+      <button id="nav-themen" onclick="goView('themen')">Themen</button>
+      <button id="nav-pfade" onclick="goView('pfade')">Lernpfade</button>
+    </nav>
+  </div>
+</header>
+<div class="shell">
+  <div class="notice-banner"><strong>Prototyp-Status:</strong>&nbsp;Diese Version zeigt alle sechs Lemmata mit dem jeweils aktuellen Bearbeitungsstand. Vollständig ausgearbeitet ist <em>Taqwā</em>; die übrigen Einträge wachsen iterativ mit der Befüllung.</div>
+  <section class="view active" id="view-lexikon">
+    <div class="view-header"><h2 class="view-title">Lexikon</h2><p class="view-subtitle">Sechs Schlüsselbegriffe im Initialkorpus, alphabetisch geordnet</p></div>
+    <div class="lemma-grid" id="lemma-grid"></div>
+  </section>
+  <section class="view" id="view-themen">
+    <div class="view-header"><h2 class="view-title">Themen</h2><p class="view-subtitle">Semantische Felder mit Zuordnung der Lemmata</p></div>
+    <div class="themes-grid" id="themes-grid"></div>
+  </section>
+  <section class="view" id="view-pfade">
+    <div class="view-header"><h2 class="view-title">Lernpfade</h2><p class="view-subtitle">Kuratierte Folgen von Lemmata für didaktisches Lernen</p></div>
+    <div class="path-list" id="path-list"></div>
+  </section>
+  <section class="view" id="view-detail"><div id="detail-content"></div></section>
+  <footer class="footer">Miftāḥ · Prototyp eines erklärend-enzyklopädischen Wörterbuchs · Ahmed Shaita 2026</footer>
+</div>
+<script id="data-script">
+const lemmata = {
+  taqwa: {
+    id:'taqwa', arab:'تَقْوَى', name:'Taqwā', pron:'[taqˈwaː]',
+    grammar:'Nomen femininum', root:'و-ق-ي', rootLatin:'w-q-y',
+    rootMeaning:'schützen, bewahren, hüten', verbForm:'VIII (ittaqā)',
+    coreTranslation:'Gottesbewusstsein',
+    fields:['Spiritualität','Glaubensethik','Quranische Begriffe'],
+    completeness:'full', completenessPct:100
+  },
+  zakat: {
+    id:'zakat', arab:'زَكَاة', name:'Zakāt', pron:'[zaˈkaːh]',
+    grammar:'Nomen femininum', root:'ز-ك-ي', rootLatin:'z-k-y',
+    rootMeaning:'rein sein, wachsen', verbForm:'—',
+    coreTranslation:'Pflichtabgabe',
+    fields:['Rituelle Praxis','Rechtsterminologie'],
+    completeness:'partial', completenessPct:45
+  },
+  iman: {
+    id:'iman', arab:'إِيمَان', name:'Īmān', pron:'[ʔiːˈmaːn]',
+    grammar:'Nomen maskulinum', root:'ء-م-ن', rootLatin:'ʾ-m-n',
+    rootMeaning:'sicher sein, vertrauen', verbForm:'IV (āmana)',
+    coreTranslation:'Glaube',
+    fields:['Glaubenslehre','Spiritualität','Ethik'],
+    completeness:'partial', completenessPct:30
+  },
+  sadaqa: {
+    id:'sadaqa', arab:'صَدَقَة', name:'Ṣadaqa', pron:'[sˤaˈdaqa]',
+    grammar:'Nomen femininum', root:'ص-د-ق', rootLatin:'ṣ-d-q',
+    rootMeaning:'wahr sein, aufrichtig sein', verbForm:'—',
+    coreTranslation:'Freiwillige Spende',
+    fields:['Rituelle Praxis','Ethik'],
+    completeness:'partial', completenessPct:45
+  },
+  salah: {
+    id:'salah', arab:'صَلَاة', name:'Ṣalāh', pron:'[sˤaˈlaːh]',
+    grammar:'Nomen femininum', root:'ص-ل-و', rootLatin:'ṣ-l-w',
+    rootMeaning:'beten, Verbindung suchen', verbForm:'—',
+    coreTranslation:'Pflichtgebet',
+    fields:['Rituelle Praxis'],
+    completeness:'partial', completenessPct:40
+  },
+  din: {
+    id:'din', arab:'دِين', name:'Dīn', pron:'[diːn]',
+    grammar:'Nomen maskulinum', root:'د-ي-ن', rootLatin:'d-y-n',
+    rootMeaning:'schulden, gehorchen, richten', verbForm:'—',
+    coreTranslation:'Religion / Lebensweise',
+    fields:['Glaubenslehre'],
+    completeness:'partial', completenessPct:25
+  }
+};
+
+const themes = [
+  { title:'Innere Spiritualität', desc:'Begriffe, die das innere Verhältnis des Gläubigen zu Gott und die Disposition des Herzens beschreiben.', lemmata:['taqwa','iman'] },
+  { title:'Rituelle Praxis', desc:'Begriffe der gottesdienstlichen Handlungen und Pflichten in der gelebten Glaubenspraxis.', lemmata:['salah','zakat','sadaqa'] },
+  { title:'Glaubenslehre', desc:'Grundlegende theologische Konzepte, die das Selbstverständnis des Islams als Religion und Lebensweise tragen.', lemmata:['iman','din'] },
+  { title:'Ethik und Tugendlehre', desc:'Begriffe, die das sittlich-praktische Handeln und die Tugendvorstellungen des Islams strukturieren.', lemmata:['taqwa','iman','sadaqa'] },
+  { title:'Rechtsterminologie (fiqh)', desc:'Begriffe, die im islamischen Recht eine spezifische, oft normativ ausgearbeitete Bedeutung tragen.', lemmata:['zakat'] }
+];
+
+const paths = [
+  { title:'Innere Disposition', desc:'Eine didaktische Sequenz von der grundlegenden Haltung zur verfeinerten spirituellen Disposition.', sequence:['taqwa','iman'], extended:['Iḥsān','Khushūʿ'] },
+  { title:'Geben im Islam', desc:'Der Themenkomplex des Spendens, beginnend bei der verpflichtenden Abgabe und ihrer Abgrenzung zum freiwilligen Geben.', sequence:['zakat','sadaqa'], extended:[] },
+  { title:'Die Säulen der Praxis', desc:'Die zentralen praktischen Pflichten des Islams als zusammenhängender Lernbogen.', sequence:['salah','zakat'], extended:['Ṣawm (Fasten)','Ḥajj (Pilgerfahrt)'] }
+];
+
+// Module-Inhalte werden in moduleContent[lemmaId][n] gespeichert
+const moduleContent = {};
+
+moduleContent.taqwa = {
+  1: { html: `<dl class="form-grid">
+    <dt>Arabisch</dt><dd><span class="arab">تَقْوَى</span></dd>
+    <dt>Umschrift (DMG)</dt><dd><span class="term">Taqwā</span></dd>
+    <dt>Aussprache</dt><dd><span class="mono">[taqˈwaː]</span></dd>
+    <dt>Grammatik</dt><dd>Nomen femininum; Verbalnomen (<span class="term">maṣdar</span>) der achten Verbalform</dd>
+    <dt>Wurzel</dt><dd><span class="ar-inline">و-ق-ي</span> (w-q-y) · Grundbedeutung: schützen, bewahren, hüten</dd>
+  </dl>` },
+  2: { html: `<p><span class="term">Taqwā</span> bezeichnet eine bewusste, durch Demut und Achtsamkeit gegenüber Gott geprägte Lebenshaltung. Die geläufige Übersetzung <span class="translation">„Gottesfurcht"</span> erfasst nur einen Teilaspekt und kann durch die christliche Konnotation der Furcht in die Irre führen. Präziser sind <span class="translation">„Gottesbewusstsein"</span> oder <span class="translation">„Achtsamkeit gegenüber Gott"</span>; siehe für eine ausführliche Diskussion Modul 6.</p>` },
+  3: { html: `<p><span class="term">Taqwā</span> trägt mehrere Bedeutungsebenen, die sich in den Quellen unterschiedlich gewichten lassen.</p>
+    <p><strong>Theologisch:</strong> die innere Haltung der Verantwortung gegenüber Gott, die in jedem Augenblick präsent ist.</p>
+    <p><strong>Ethisch:</strong> die Disposition, die zwischen Erlaubtem und Verbotenem unterscheidet und zu rechtschaffenem Handeln führt.</p>
+    <p><strong>Spirituell-mystisch:</strong> in der sufischen Tradition der höchste Grad geistiger Wachsamkeit, in dem das Bewusstsein des Göttlichen das Tun durchdringt.</p>
+    <p>Diese Ebenen sind nicht trennscharf; sie überlagern sich häufig im selben Vorkommen.</p>` },
+  4: { html: `<p><span class="term">Taqwā</span> gehört zu den am häufigsten genannten Tugenden im Quran.</p>
+    <div class="quran-card"><div class="quran-label">Quran 49:13</div><div class="quran-text">„Der Edelste von euch bei Gott ist derjenige unter euch, der die größte Taqwā hat."</div></div>
+    <p>Hier wird <span class="term">Taqwā</span> zum einzig legitimen Kriterium menschlicher Auszeichnung erklärt, jenseits von Herkunft, Stamm oder Geschlecht.</p>
+    <div class="quran-card"><div class="quran-label">Quran 2:2–3</div><div class="quran-text">Der Quran wird als „Rechtleitung für die Gottesbewussten (al-muttaqīn)" eingeführt — Taqwā ist hier Voraussetzung für das Verstehen der Offenbarung.</div></div>
+    <div class="quran-card"><div class="quran-label">Quran 2:183</div><div class="quran-text">Im Fastengebot wird Taqwā als Ziel des Fastens benannt: „auf dass ihr Taqwā erlangt".</div></div>
+    <p>In der prophetischen Tradition steht der bekannte Hadith, in dem der Prophet auf sein Herz deutet und sagt: „Die Frömmigkeit ist hier" (überliefert bei Muslim). Bei al-Ghazālī (gest. 1111) gilt <span class="term">Taqwā</span> als die Wurzel aller anderen Tugenden.</p>` },
+  5: { html: `<p>In modernen Predigten gehört <span class="term">Taqwā</span> zum festen Vokabular; in Gesprächen unter Muslimen wird die Frage „Hast du Taqwā?" oft als ethische Erinnerung verwendet, vergleichbar mit dem deutschen „Sei achtsam".</p>
+    <p>Deutsche Wiedergaben variieren stark: <span class="translation">„Gottesfurcht"</span>, <span class="translation">„Gottesbewusstsein"</span>, <span class="translation">„Gottesehrfurcht"</span> und <span class="translation">„Frömmigkeit"</span> werden parallel benutzt. Diese Vielfalt ist kein Zufall, sondern Ausdruck der Schwierigkeit, den Begriff in einer einzigen deutschen Vokabel zu fassen.</p>
+    <p><strong>Typische Missverständnisse:</strong> <span class="term">Taqwā</span> wird gelegentlich mit reiner Angst, mit Schuldbewusstsein oder mit asketischer Strenge verwechselt. Im arabischen Konzept liegt das Gewicht jedoch nicht auf der Angst, sondern auf der Wachsamkeit.</p>` },
+  6: { html: `<p>Die deutsche Wiedergabe von <span class="term">Taqwā</span> steht beispielhaft für das in dieser Konzeption zentrale Äquivalenzproblem.</p>
+    <div class="equiv-list">
+      <div class="equiv-row"><span class="equiv-name">Gottesfurcht</span><span class="equiv-desc">trifft Ehrfurcht, übernimmt aber die christliche Furcht-Konnotation</span><span class="equiv-rating bad">Missverständlich</span></div>
+      <div class="equiv-row"><span class="equiv-name">Gottesbewusstsein</span><span class="equiv-desc">trifft Bewusstheit, weniger die ethische Verbindlichkeit</span><span class="equiv-rating mid">Brauchbar</span></div>
+      <div class="equiv-row"><span class="equiv-name">Gottesehrfurcht</span><span class="equiv-desc">balanciert Ehrfurcht und Wachsamkeit</span><span class="equiv-rating good">Idiomatisch</span></div>
+      <div class="equiv-row"><span class="equiv-name">Achtsamkeit gegenüber Gott</span><span class="equiv-desc">umschreibend, präzise, aber sperrig</span><span class="equiv-rating good">Analytisch klar</span></div>
+    </div>
+    <p>Im Sinne der Äquivalenztypologie (Zgusta, 1971) handelt es sich in keinem Fall um Volläquivalenz. Die Wurzel <span class="ar-inline">و-ق-ي</span> trägt nicht primär die Bedeutung des „Fürchtens", sondern die des „Hütens" und „Bewahrens": <span class="term">Taqwā</span> ist im Kern eine <em>behütende</em> Haltung.</p>` },
+  7: { html: `<p>Drei kontrastive Szenarien zeigen, in welchen Kontexten welche Bedeutungsfacette aktiviert wird.</p>
+    <div class="examples">
+      <div class="ex-card"><span class="ex-context">Im Gebet</span><div class="ex-body"><span class="term">Taqwā</span> meint die innere Wachsamkeit dafür, dass man vor Gott steht — nicht das Auswendiglernen der Bewegungen, sondern die Präsenz des Bewusstseins im Vollzug.</div></div>
+      <div class="ex-card"><span class="ex-context">Im sozialen Handeln</span><div class="ex-body"><span class="term">Taqwā</span> zeigt sich als ethischer Anker im Umgang mit anderen, etwa in der Verlässlichkeit beim Versprechen.</div></div>
+      <div class="ex-card"><span class="ex-context">Im Ramadan</span><div class="ex-body">Das Fasten ist nach Quran 2:183 selbst ein Übungsfeld für <span class="term">Taqwā</span>; das Aussetzen sinnlicher Reize schult die Wachsamkeit für den Alltag.</div></div>
+    </div>` },
+  8: { html: `<div class="connect-group">
+      <div class="connect-label">Kohyponyme · Verwandte religiös-ethische Begriffe</div>
+      <div class="connect-chips">
+        <button class="chip" onclick="goView('detail',{lemmaId:'iman'})"><span class="ar">إِيمَان</span><span class="name">Īmān</span><span class="desc">Glaube</span></button>
+        <span class="chip static"><span class="ar">إِحْسَان</span><span class="name">Iḥsān</span><span class="desc">Erweiterung</span></span>
+        <span class="chip static"><span class="ar">خُشُوع</span><span class="name">Khushūʿ</span><span class="desc">Erweiterung</span></span>
+      </div>
+    </div>
+    <div class="connect-group">
+      <div class="connect-label">Antonym</div>
+      <div class="connect-chips"><span class="chip static"><span class="ar">غَفْلَة</span><span class="name">Ghafla</span><span class="desc">Erweiterung</span></span></div>
+    </div>
+    <div class="connect-group">
+      <div class="connect-label">Etymologische Verwandte · Wurzel w-q-y</div>
+      <div class="connect-chips">
+        <span class="chip static"><span class="ar">مُتَّقِي</span><span class="name">Muttaqī</span><span class="desc">der Gottesbewusste</span></span>
+        <span class="chip static"><span class="ar">اِتِّقَاء</span><span class="name">Ittiqāʾ</span><span class="desc">das Sich-Hüten</span></span>
+      </div>
+    </div>
+    <div class="path-card">
+      <div class="connect-label">Lernpfad · Innere Spiritualität</div>
+      <div class="path-flow"><button class="path-node current">Taqwā</button><span class="path-arrow">→</span><button class="path-node" onclick="goView('detail',{lemmaId:'iman'})">Īmān</button></div>
+    </div>` }
+};
+
+moduleContent.zakat = {
+  1: { html: `<dl class="form-grid">
+    <dt>Arabisch</dt><dd><span class="arab">زَكَاة</span></dd>
+    <dt>Umschrift (DMG)</dt><dd><span class="term">Zakāt</span></dd>
+    <dt>Aussprache</dt><dd><span class="mono">[zaˈkaːh]</span></dd>
+    <dt>Grammatik</dt><dd>Nomen femininum; Verbalnomen</dd>
+    <dt>Wurzel</dt><dd><span class="ar-inline">ز-ك-ي</span> (z-k-y) · Grundbedeutung: rein sein, wachsen</dd>
+  </dl>
+  <div class="pending"><strong>📝 Zu liefern:</strong> genaue Verbalform-Klassifikation (II oder IV?); Wehr-Stelle zur Wurzelbedeutung mit Seitenangabe.</div>` },
+  2: { html: `<p><span class="term">Zakāt</span> bezeichnet die festgelegte religiöse Pflichtabgabe, durch die zugleich das Vermögen geläutert wird. Die Übersetzung <span class="translation">„Almosen"</span> verfehlt den Pflichtcharakter; <span class="translation">„Pflichtabgabe"</span> allein lässt die spirituelle Dimension der Läuterung aus.</p>
+  <div class="pending"><strong>📝 Zu liefern:</strong> knappe, von dir formulierte Definition (2–3 Sätze) im Sprachregister der Zielgruppe.</div>` },
+  3: { html: `<p><span class="term">Zakāt</span> trägt drei Lesarten:</p>
+    <p><strong>Theologisch:</strong> Reinigung des Vermögens; Akt der Anerkennung, dass aller Besitz von Gott kommt.</p>
+    <p><strong>Rechtlich (fiqh):</strong> festgelegte Pflichtabgabe einer bestimmten Quote (klassisch 2,5 % bei Geldvermögen) des Besitzes an festgelegte Empfängerkategorien, fällig nach Erreichen des Mindestvermögens (<span class="term">Niṣāb</span>) und nach Ablauf eines Mondjahres (<span class="term">Ḥaul</span>).</p>
+    <p><strong>Alltagssprachlich:</strong> häufig undifferenziert als „Spende" verwendet, oft verwechselt mit <span class="term">Ṣadaqa</span>.</p>
+    <div class="pending"><strong>📝 Zu liefern:</strong> Quoten- und Niṣāb-Angaben gegen eine Rechtsschule verifizieren.</div>` },
+  4: { html: `<div class="pending"><strong>📝 Modul 4 — kulturhistorischer Kontext:</strong> Hier ist die Lücke am größten. Zu liefern:
+    <ul style="margin-top:8px;padding-left:20px;line-height:1.7">
+      <li>Drei zentrale Quranverse mit Standardübersetzung (Bobzin / Khoury / Paret) — Vorschläge: Quran 9:60 (acht Empfängerkategorien), Quran 2:43 (Verbindung Ṣalāh + Zakāt), Quran 9:103 (Läuterungsfunktion)</li>
+      <li>Mindestens ein Hadith mit Sammlungs- und Stellenangabe (z. B. Ṣaḥīḥ al-Buḫārī, Kitāb az-Zakāt)</li>
+      <li>Ein wirkungsgeschichtlicher Verweis (al-Ghazālī, Iḥyāʾ, Kapitel über Zakāt) mit Ausgabenangabe</li>
+    </ul></div>` },
+  5: { html: `<p>Aus Kap. 4 bekannt: Konvertierte verwechseln <span class="term">Zakāt</span> häufig mit <span class="term">Ṣadaqa</span> (TN 2, 6, 11, 13).</p>
+    <div class="pending"><strong>📝 Zu liefern:</strong>
+    <ul style="margin-top:8px;padding-left:20px;line-height:1.7">
+      <li>Wie wird Zakāt in deutschen Moscheegemeinden praktiziert? (über Zakāt-Stiftungen, individuell, im Ramadan)</li>
+      <li>Welche typischen Missverständnisse begegnen Konvertierten neben der Ṣadaqa-Verwechslung?</li>
+      <li>Konkrete Beispiel-Formulierungen aus dem Sprachgebrauch</li>
+    </ul></div>` },
+  6: { html: `<p>Aus Kap. 5.4.6 ist die Bewertungstabelle schon halb fertig:</p>
+    <div class="equiv-list">
+      <div class="equiv-row"><span class="equiv-name">Almosen</span><span class="equiv-desc">deutsches Konzept individueller Großzügigkeit ohne Verpflichtungscharakter</span><span class="equiv-rating bad">Irreführend</span></div>
+      <div class="equiv-row"><span class="equiv-name">Pflichtabgabe</span><span class="equiv-desc">trifft den Pflichtcharakter, lässt die spirituelle Läuterung aus</span><span class="equiv-rating mid">Brauchbar</span></div>
+      <div class="equiv-row"><span class="equiv-name">Alms-Tax (eslam.de)</span><span class="equiv-desc">Steuermetapher überdeckt die theologische Dimension</span><span class="equiv-rating bad">Problematisch</span></div>
+    </div>
+    <div class="pending"><strong>📝 Zu liefern:</strong> Entscheidung über eine vierte, analytisch klare Wiedergabe (etwa „Vermögensreinigungsabgabe"); etymologische Pointe wie bei Taqwā (Wurzel z-k-y „rein sein, wachsen" → die Reinigung steckt im Wort).</div>` },
+  7: { html: `<div class="pending"><strong>📝 Modul 7 — Beispiele:</strong> Drei kontrastive Szenarien zu liefern. Vorschläge: <span class="term">Zakāt al-Māl</span> vs. <span class="term">Zakāt al-Fiṭr</span> · Zakāt im Ramadan vs. ganzjährig · Zakāt als individuelle Pflicht vs. organisierte Verteilung.</div>` },
+  8: { html: `<div class="connect-group">
+      <div class="connect-label">Antonym / Kontrast</div>
+      <div class="connect-chips"><button class="chip" onclick="goView('detail',{lemmaId:'sadaqa'})"><span class="ar">صَدَقَة</span><span class="name">Ṣadaqa</span><span class="desc">freiwillig vs. Pflicht</span></button></div>
+    </div>
+    <div class="connect-group">
+      <div class="connect-label">Kohyponyme · Fünf Säulen</div>
+      <div class="connect-chips">
+        <button class="chip" onclick="goView('detail',{lemmaId:'salah'})"><span class="ar">صَلَاة</span><span class="name">Ṣalāh</span><span class="desc">Pflichtgebet</span></button>
+        <span class="chip static"><span class="ar">صَوْم</span><span class="name">Ṣawm</span><span class="desc">Fasten</span></span>
+        <span class="chip static"><span class="ar">حَجّ</span><span class="name">Ḥajj</span><span class="desc">Pilgerfahrt</span></span>
+        <span class="chip static"><span class="ar">شَهَادَة</span><span class="name">Šahāda</span><span class="desc">Glaubensbekenntnis</span></span>
+      </div>
+    </div>
+    <div class="connect-group">
+      <div class="connect-label">Etymologische Verwandte · Wurzel z-k-y</div>
+      <div class="connect-chips"><span class="chip static"><span class="ar">تَزْكِيَة</span><span class="name">Tazkiya</span><span class="desc">Reinigung der Seele</span></span></div>
+    </div>
+    <div class="connect-group">
+      <div class="connect-label">Untergeordnete Begriffe</div>
+      <div class="connect-chips">
+        <span class="chip static"><span class="ar">نِصَاب</span><span class="name">Niṣāb</span><span class="desc">Mindestvermögen</span></span>
+        <span class="chip static"><span class="ar">حَوْل</span><span class="name">Ḥaul</span><span class="desc">Wartezeit (Mondjahr)</span></span>
+        <span class="chip static"><span class="ar">مُسْتَحِقّ</span><span class="name">Mustaḥiqq</span><span class="desc">Empfänger</span></span>
+      </div>
+    </div>
+    <div class="path-card">
+      <div class="connect-label">Lernpfad · Geben im Islam</div>
+      <div class="path-flow"><button class="path-node current">Zakāt</button><span class="path-arrow">→</span><button class="path-node" onclick="goView('detail',{lemmaId:'sadaqa'})">Ṣadaqa</button></div>
+    </div>
+    <div class="pending"><strong>📝 Zu liefern:</strong> Verifikation der acht Empfängerkategorien aus Quran 9:60.</div>` }
+};
+
+moduleContent.iman = {
+  1: { html: `<dl class="form-grid">
+    <dt>Arabisch</dt><dd><span class="arab">إِيمَان</span></dd>
+    <dt>Umschrift (DMG)</dt><dd><span class="term">Īmān</span></dd>
+    <dt>Aussprache</dt><dd><span class="mono">[ʔiːˈmaːn]</span></dd>
+    <dt>Grammatik</dt><dd>Nomen maskulinum; Verbalnomen der vierten Verbalform (āmana, „glauben")</dd>
+    <dt>Wurzel</dt><dd><span class="ar-inline">ء-م-ن</span> (ʾ-m-n) · Grundbedeutung: sicher sein, vertrauen</dd>
+  </dl>
+  <div class="pending"><strong>📝 Zu liefern:</strong> Verbalform-Klassifikation verifizieren; Wehr-Stelle.</div>` },
+  2: { html: `<p><span class="term">Īmān</span> bezeichnet den religiösen Glauben als innere Überzeugung und Bindung des Herzens an Gott. Anders als das deutsche <span class="translation">„Glaube"</span>, das eher kognitiv-meinungsmäßig konnotiert ist, trägt <span class="term">Īmān</span> eine zweite Schicht: die <strong>Vertrauenswürdigkeit</strong> als ethische Disposition, die sich im praktischen Handeln zeigt.</p>
+  <div class="pending"><strong>📝 Zu liefern:</strong> knappe Definition, die innere Überzeugung und praktische Tugend zusammenführt.</div>` },
+  3: { html: `<p><strong>Theologisch:</strong> Herzensbindung an Gott; Akzeptanz der sechs Glaubensartikel (<span class="term">arkān al-īmān</span>).</p>
+    <p><strong>Ethisch:</strong> Vertrauenswürdigkeit, Verlässlichkeit; sich aufrichtig verhalten.</p>
+    <p><strong>Spirituell:</strong> tief verwurzeltes Vertrauen, das das ganze Leben durchdringt; in der sufischen Tradition gestuft entwickelbar.</p>
+    <div class="pending"><strong>📝 Zu liefern:</strong> die sechs Glaubensartikel mit Beleg (Quran, Hadith Jibrīl); sufische Stufung mit Quellangabe.</div>` },
+  4: { html: `<div class="pending"><strong>📝 Modul 4 — kulturhistorischer Kontext:</strong> Aus den Materialien nichts Spezifisches. Vorschläge zur Auswahl:
+    <ul style="margin-top:8px;padding-left:20px;line-height:1.7">
+      <li>Quran 2:285 („āmana ar-rasūlu…"), Quran 49:14 (Unterscheidung Iman/Islam)</li>
+      <li>Der Hadith Jibrīl bei Muslim (Kitāb al-Īmān) mit Stellenangabe</li>
+      <li>Wirkungsgeschichtlicher Verweis: z. B. al-Ghazālī oder al-Ašʿarī</li>
+    </ul></div>` },
+  5: { html: `<div class="pending"><strong>📝 Modul 5 — Gebrauchspragmatik:</strong>
+    <ul style="margin-top:8px;padding-left:20px;line-height:1.7">
+      <li>Wie wird <span class="term">Īmān</span> in deutschsprachigen muslimischen Kontexten verwendet?</li>
+      <li>Typische Missverständnisse für Konvertierte (z. B. Reduktion auf intellektuelles Fürwahrhalten)</li>
+    </ul></div>` },
+  6: { html: `<p>Hauptproblem: Das deutsche <span class="translation">„Glaube"</span> ist semantisch enger als <span class="term">Īmān</span>. Mögliche Wiedergaben: „Glaube", „Gottvertrauen", „innerer Glaube", „Glaubensgewissheit".</p>
+  <div class="pending"><strong>📝 Zu liefern:</strong> vier Wiedergaben mit Reichweite und Einschätzung (analog zu Taqwā Modul 6); etymologische Pointe: Verbindung zu <span class="term">amīn</span> (vertrauenswürdig) und <span class="term">amāna</span> (Vertrauensgut).</div>` },
+  7: { html: `<p>Aus Kap. 5.4.7 schon angelegt: Gegenüberstellung von <em>innerer Überzeugung</em> (Glaubensbekenntnis, Herzensbindung) und <em>praktischem Tun</em> (Verlässlichkeit, Vertrauenswürdigkeit).</p>
+  <div class="pending"><strong>📝 Zu liefern:</strong> drei kontrastive Szenarien — Vorschlag: „Im Glaubensbekenntnis", „Im sozialen Versprechen", „In der Lebenskrise".</div>` },
+  8: { html: `<div class="connect-group">
+      <div class="connect-label">Kohyponyme</div>
+      <div class="connect-chips">
+        <button class="chip" onclick="goView('detail',{lemmaId:'taqwa'})"><span class="ar">تَقْوَى</span><span class="name">Taqwā</span><span class="desc">Gottesbewusstsein</span></button>
+        <span class="chip static"><span class="ar">إِحْسَان</span><span class="name">Iḥsān</span><span class="desc">Vorbildliches Tun</span></span>
+      </div>
+    </div>
+    <div class="connect-group">
+      <div class="connect-label">Antonym</div>
+      <div class="connect-chips"><span class="chip static"><span class="ar">كُفْر</span><span class="name">Kufr</span><span class="desc">Unglaube</span></span></div>
+    </div>
+    <div class="connect-group">
+      <div class="connect-label">Etymologische Verwandte · Wurzel ʾ-m-n</div>
+      <div class="connect-chips">
+        <span class="chip static"><span class="ar">أَمِين</span><span class="name">Amīn</span><span class="desc">vertrauenswürdig</span></span>
+        <span class="chip static"><span class="ar">أَمَانَة</span><span class="name">Amāna</span><span class="desc">Vertrauensgut</span></span>
+      </div>
+    </div>
+    <div class="pending"><strong>📝 Zu liefern:</strong> Entscheidung — Iḥsān und Khushūʿ als eigene Lemmata im erweiterten Korpus?</div>` }
+};
+
+moduleContent.sadaqa = {
+  1: { html: `<dl class="form-grid">
+    <dt>Arabisch</dt><dd><span class="arab">صَدَقَة</span></dd>
+    <dt>Umschrift (DMG)</dt><dd><span class="term">Ṣadaqa</span></dd>
+    <dt>Aussprache</dt><dd><span class="mono">[sˤaˈdaqa]</span></dd>
+    <dt>Grammatik</dt><dd>Nomen femininum</dd>
+    <dt>Wurzel</dt><dd><span class="ar-inline">ص-د-ق</span> (ṣ-d-q) · Grundbedeutung: wahr sein, aufrichtig sein</dd>
+  </dl>
+  <div class="pending"><strong>📝 Zu liefern:</strong> Wehr-Stelle zur Wurzelbedeutung.</div>` },
+  2: { html: `<p><span class="term">Ṣadaqa</span> bezeichnet die freiwillige Gabe — Geld, Güter, Zeit oder Worte — aus aufrichtigem Herzen. Sie ist der Pflichtabgabe <span class="term">Zakāt</span> verwandt, aber nicht verpflichtend; die Wurzel <span class="ar-inline">ص-د-ق</span> verbindet den Akt mit der Aufrichtigkeit der Geberin oder des Gebers.</p>
+  <div class="pending"><strong>📝 Zu liefern:</strong> knappe Definition, die das Aufrichtigkeitsmoment der Wurzel mit aufnimmt.</div>` },
+  3: { html: `<p><strong>Theologisch:</strong> aufrichtige Hingabe, die das Geben mit der Wahrhaftigkeit des Herzens verbindet.</p>
+    <p><strong>Rechtlich (fiqh):</strong> freiwillige Spende, im Unterschied zur Pflichtabgabe <span class="term">Zakāt</span>; keine festen Quoten, Empfänger oder Zeiten.</p>
+    <p><strong>Alltagssprachlich:</strong> häufig synonym zu „Spende" oder fälschlich zu <span class="term">Zakāt</span> verwendet (TN 2, 6, 11, 13 in Kap. 4).</p>` },
+  4: { html: `<p>Klassisch sind der Hadith „Auch ein Lächeln ist Ṣadaqa" und Quran 2:271 zur verborgenen vs. öffentlichen Spende.</p>
+    <div class="pending"><strong>📝 Zu liefern:</strong>
+    <ul style="margin-top:8px;padding-left:20px;line-height:1.7">
+      <li>Quranverse mit Standardübersetzung (Vorschlag: 2:271, 2:264, 9:60)</li>
+      <li>Hadith „Lächeln als Ṣadaqa" mit Sammlungs- und Stellenangabe</li>
+      <li>Konzept der <span class="term">Ṣadaqa jāriya</span> (fortwirkende Spende) mit Beleg</li>
+    </ul></div>` },
+  5: { html: `<p>Zentrale Pragmatikfrage aus Kap. 4: Konvertierte verwechseln <span class="term">Ṣadaqa</span> häufig mit <span class="term">Zakāt</span>. Das Modul muss diese Verwechslung explizit klären.</p>
+    <div class="pending"><strong>📝 Zu liefern:</strong> konkrete Klärung Pflicht vs. freiwillig für die Zielgruppe; Beispiele für unterschiedliche Ṣadaqa-Formen (Geld, Lächeln, Hilfsbereitschaft).</div>` },
+  6: { html: `<p>Mögliche Wiedergaben: „Almosen", „freiwillige Spende", „aufrichtige Gabe". Die etymologische Pointe ist die Wurzel <span class="ar-inline">ص-د-ق</span> („wahr sein") — <span class="term">Ṣadaqa</span> als Akt, der die Aufrichtigkeit beweist.</p>
+  <div class="pending"><strong>📝 Zu liefern:</strong> vier Wiedergaben mit Bewertung analog Taqwā / Zakāt; etymologische Pointe ausformulieren.</div>` },
+  7: { html: `<div class="pending"><strong>📝 Modul 7 — Beispiele:</strong> drei Szenarien zu liefern. Vorschläge: „Ṣadaqa als Geste", „Ṣadaqa im Verborgenen", „<span class="term">Ṣadaqa jāriya</span>".</div>` },
+  8: { html: `<div class="connect-group">
+      <div class="connect-label">Antonym / Kontrast</div>
+      <div class="connect-chips"><button class="chip" onclick="goView('detail',{lemmaId:'zakat'})"><span class="ar">زَكَاة</span><span class="name">Zakāt</span><span class="desc">Pflicht vs. freiwillig</span></button></div>
+    </div>
+    <div class="connect-group">
+      <div class="connect-label">Etymologische Verwandte · Wurzel ṣ-d-q</div>
+      <div class="connect-chips">
+        <span class="chip static"><span class="ar">صِدِّيق</span><span class="name">Ṣiddīq</span><span class="desc">der Wahrhaftige</span></span>
+        <span class="chip static"><span class="ar">صِدْق</span><span class="name">Ṣidq</span><span class="desc">Wahrheit, Aufrichtigkeit</span></span>
+      </div>
+    </div>
+    <div class="path-card">
+      <div class="connect-label">Lernpfad · Geben im Islam</div>
+      <div class="path-flow"><button class="path-node" onclick="goView('detail',{lemmaId:'zakat'})">Zakāt</button><span class="path-arrow">→</span><button class="path-node current">Ṣadaqa</button></div>
+    </div>` }
+};
+
+moduleContent.salah = {
+  1: { html: `<dl class="form-grid">
+    <dt>Arabisch</dt><dd><span class="arab">صَلَاة</span></dd>
+    <dt>Umschrift (DMG)</dt><dd><span class="term">Ṣalāh</span></dd>
+    <dt>Aussprache</dt><dd><span class="mono">[sˤaˈlaːh]</span></dd>
+    <dt>Grammatik</dt><dd>Nomen femininum</dd>
+    <dt>Wurzel</dt><dd><span class="ar-inline">ص-ل-و</span> (ṣ-l-w) · Grundbedeutung: beten, Verbindung suchen</dd>
+  </dl>
+  <div class="pending"><strong>📝 Zu liefern:</strong> Wehr-Stelle zur Wurzelbedeutung.</div>` },
+  2: { html: `<p><span class="term">Ṣalāh</span> ist das rituelle Pflichtgebet, das fünfmal täglich zu festgesetzten Zeiten in bestimmter Form vollzogen wird. Es ist die zweite Säule des Islams und mehr als nur Sprache — eine Verbindung zwischen Gläubigem und Gott in Körperhaltung, Wort und Bewusstsein.</p>
+  <div class="pending"><strong>📝 Zu liefern:</strong> knappe Definition, die das rituelle und das spirituelle Moment zusammenbringt.</div>` },
+  3: { html: `<p><strong>Theologisch:</strong> direkter Akt der Anbetung, in dem der Gläubige bewusst vor Gott steht.</p>
+    <p><strong>Rechtlich (fiqh):</strong> fünfmaliges Pflichtgebet mit festen Zeiten (Fajr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ), Bewegungen (Rakʿāt) und Inhalten.</p>
+    <p><strong>Spirituell:</strong> Übung in <span class="term">Khushūʿ</span> (Demut) und in <span class="term">Taqwā</span> (Gottesbewusstsein im Moment des Gebets) — vgl. Taqwā Modul 7.</p>
+    <div class="pending"><strong>📝 Zu liefern:</strong> Belege für die theologische und rechtliche Lesart; eventuell alltagssprachliche Verwendung („Beten").</div>` },
+  4: { html: `<div class="pending"><strong>📝 Modul 4 — kulturhistorischer Kontext:</strong>
+    <ul style="margin-top:8px;padding-left:20px;line-height:1.7">
+      <li>Drei zentrale Quranverse zur Ṣalāh mit Übersetzung (Vorschlag: 2:43, 4:103, 17:78, 20:14)</li>
+      <li>Mindestens ein Hadith zur Bedeutung des Gebets</li>
+      <li>Wirkungsgeschichte: Mi'rāj-Erzählung als Ursprungsnarrativ des fünfmaligen Gebets</li>
+    </ul></div>` },
+  5: { html: `<div class="pending"><strong>📝 Modul 5 — Gebrauchspragmatik:</strong>
+    <ul style="margin-top:8px;padding-left:20px;line-height:1.7">
+      <li>Wie wird Ṣalāh in deutschsprachigen muslimischen Kontexten genannt? (Salat, Salah, Gebet)</li>
+      <li>Typische Anfangshürden für Konvertierte (Bewegungsabfolge, Rezitation, Zeiten)</li>
+      <li>Praktische Hinweise: Wuḍūʾ-Vorbereitung, Qibla-Bestimmung</li>
+    </ul></div>` },
+  6: { html: `<p>Mögliche Wiedergaben: „Gebet", „Pflichtgebet", „rituelles Gebet". Das deutsche <span class="translation">„Gebet"</span> ist semantisch breiter und schließt freies Beten ein — <span class="term">Ṣalāh</span> meint immer das ritualisierte, festgesetzte Pflichtgebet.</p>
+  <div class="pending"><strong>📝 Zu liefern:</strong> vier Wiedergaben mit Bewertung; Kontrast zu <span class="term">Duʿāʾ</span> (Bittgebet, freies Gebet).</div>` },
+  7: { html: `<div class="pending"><strong>📝 Modul 7 — Beispiele:</strong> drei Szenarien zu liefern. Vorschlag: „Fajr — das Morgengebet", „Ṣalāh in der Gemeinschaft (Jamāʿa)", „Ṣalāh auf Reisen".</div>` },
+  8: { html: `<div class="connect-group">
+      <div class="connect-label">Kohyponyme · Fünf Säulen</div>
+      <div class="connect-chips">
+        <span class="chip static"><span class="ar">شَهَادَة</span><span class="name">Šahāda</span></span>
+        <button class="chip" onclick="goView('detail',{lemmaId:'zakat'})"><span class="ar">زَكَاة</span><span class="name">Zakāt</span></button>
+        <span class="chip static"><span class="ar">صَوْم</span><span class="name">Ṣawm</span></span>
+        <span class="chip static"><span class="ar">حَجّ</span><span class="name">Ḥajj</span></span>
+      </div>
+    </div>
+    <div class="connect-group">
+      <div class="connect-label">Untergeordnete Begriffe</div>
+      <div class="connect-chips">
+        <span class="chip static"><span class="ar">وُضُوء</span><span class="name">Wuḍūʾ</span><span class="desc">Gebetswaschung</span></span>
+        <span class="chip static"><span class="ar">قِبْلَة</span><span class="name">Qibla</span><span class="desc">Gebetsrichtung</span></span>
+        <span class="chip static"><span class="ar">رَكْعَة</span><span class="name">Rakʿa</span><span class="desc">Gebetsabschnitt</span></span>
+      </div>
+    </div>
+    <div class="connect-group">
+      <div class="connect-label">Kontrast</div>
+      <div class="connect-chips"><span class="chip static"><span class="ar">دُعَاء</span><span class="name">Duʿāʾ</span><span class="desc">freies Bittgebet</span></span></div>
+    </div>` }
+};
+
+moduleContent.din = {
+  1: { html: `<dl class="form-grid">
+    <dt>Arabisch</dt><dd><span class="arab">دِين</span></dd>
+    <dt>Umschrift (DMG)</dt><dd><span class="term">Dīn</span></dd>
+    <dt>Aussprache</dt><dd><span class="mono">[diːn]</span></dd>
+    <dt>Grammatik</dt><dd>Nomen maskulinum</dd>
+    <dt>Wurzel</dt><dd><span class="ar-inline">د-ي-ن</span> (d-y-n) · Grundbedeutung: schulden, gehorchen, richten</dd>
+  </dl>
+  <div class="pending"><strong>📝 Zu liefern:</strong> Wehr-Stelle zur Wurzelbedeutung.</div>` },
+  2: { html: `<p><span class="term">Dīn</span> bezeichnet das umfassende System aus Glaube, Praxis und Lebensweise. Die deutsche Übersetzung <span class="translation">„Religion"</span> ist enger als der arabische Begriff, der den Islam nicht als abgrenzbaren Bereich, sondern als Lebensgrundlage versteht.</p>
+  <div class="pending"><strong>📝 Zu liefern:</strong> knappe Definition, die das Umfassend-Lebensweltliche betont.</div>` },
+  3: { html: `<p><strong>Theologisch:</strong> die von Gott offenbarte Lebensordnung; der Islam als der „wahre Dīn".</p>
+    <p><strong>Ethisch-soziologisch:</strong> Lebensweise, die das Verhältnis zu Gott, zu sich selbst und zur Gemeinschaft umfasst.</p>
+    <p><strong>Quranisch:</strong> auch „Gericht, Abrechnung" (vgl. <span class="term">yawm ad-dīn</span> — „Tag des Gerichts").</p>
+    <div class="pending"><strong>📝 Zu liefern:</strong> Belege für die drei Lesarten (Quran 3:19, Quran 1:4); Hinweis auf die Doppelbedeutung „Religion" und „Gericht" (etymologisch verbunden über „Pflicht/Schuld").</div>` },
+  4: { html: `<div class="pending"><strong>📝 Modul 4 — kulturhistorischer Kontext:</strong> Zentrale Stellen vorgeschlagen:
+    <ul style="margin-top:8px;padding-left:20px;line-height:1.7">
+      <li>Quran 3:19 („al-dīn ʿinda Llāhi al-Islām"), Quran 5:3 („vollendet habe ich euren Dīn"), Quran 1:4 („yawm ad-dīn")</li>
+      <li>Den Hadith Jibrīl (vgl. Īmān Modul 4), der Islam, Iman und Iḥsān als drei Aspekte des Dīn definiert</li>
+      <li>Eventuell: wirkungsgeschichtliche Diskussion bei Ibn Taymiyya oder Šāṭibī</li>
+    </ul></div>` },
+  5: { html: `<div class="pending"><strong>📝 Modul 5 — Gebrauchspragmatik:</strong>
+    <ul style="margin-top:8px;padding-left:20px;line-height:1.7">
+      <li>Wie wird <span class="term">Dīn</span> in deutschsprachigen muslimischen Kontexten verwendet?</li>
+      <li>Hauptmissverständnis: Reduktion auf „Religion" im westlichen Sinn (Privatsache, abgrenzbarer Lebensbereich)</li>
+      <li>Wendungen: „im Dīn stark sein", „der Dīn ist Aufrichtigkeit" (Hadith)</li>
+    </ul></div>` },
+  6: { html: `<p>Mögliche Wiedergaben: „Religion", „Lebensweise", „Glaubensordnung", „Lebensordnung". Hier ist das Äquivalenzproblem am tiefsten: der deutsche Religionsbegriff trägt seine eigene christlich-säkulare Geschichte mit, die mit dem quranischen Dīn-Begriff nicht deckungsgleich ist.</p>
+  <div class="pending"><strong>📝 Zu liefern:</strong> vier Wiedergaben mit Bewertung; Diskussion der christlich-säkularen Konnotationen des deutschen „Religion"; Verweis auf die Wurzel d-y-n und die etymologische Doppelbedeutung.</div>` },
+  7: { html: `<div class="pending"><strong>📝 Modul 7 — Beispiele:</strong> drei Szenarien zu liefern. Vorschlag: „Dīn als Lebensordnung im Alltag", „Dīn vs. Dunyā (Diesseits)", „yawm ad-dīn (Tag der Abrechnung)".</div>` },
+  8: { html: `<div class="connect-group">
+      <div class="connect-label">Verwandte Begriffe</div>
+      <div class="connect-chips">
+        <span class="chip static"><span class="ar">إِسْلَام</span><span class="name">Islām</span><span class="desc">Hingabe an Gott</span></span>
+        <span class="chip static"><span class="ar">شَرِيعَة</span><span class="name">Sharīʿa</span><span class="desc">das (göttliche) Gesetz</span></span>
+      </div>
+    </div>
+    <div class="connect-group">
+      <div class="connect-label">Kontrast</div>
+      <div class="connect-chips"><span class="chip static"><span class="ar">دُنْيَا</span><span class="name">Dunyā</span><span class="desc">Diesseits</span></span></div>
+    </div>
+    <div class="pending"><strong>📝 Zu liefern:</strong> Vernetzung weiter ausbauen; eventuell Iḥsān, Ibādāt, Akhlāq aufnehmen; Lernpfad-Vorschlag entwickeln.</div>` }
+};
+</script>
+<script id="render-script">
+// === NAVIGATION ===
+function goView(view, opts) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.topbar-nav button').forEach(b => b.classList.remove('active'));
+  if (view === 'lexikon') { document.getElementById('view-lexikon').classList.add('active'); document.getElementById('nav-lexikon').classList.add('active'); renderLexikon(); }
+  else if (view === 'themen') { document.getElementById('view-themen').classList.add('active'); document.getElementById('nav-themen').classList.add('active'); renderThemen(); }
+  else if (view === 'pfade') { document.getElementById('view-pfade').classList.add('active'); document.getElementById('nav-pfade').classList.add('active'); renderPfade(); }
+  else if (view === 'detail') { document.getElementById('view-detail').classList.add('active'); renderDetail(opts.lemmaId); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// === LEXIKON ===
+function renderLexikon() {
+  const sorted = Object.values(lemmata).sort((a, b) => a.name.localeCompare(b.name));
+  document.getElementById('lemma-grid').innerHTML = sorted.map(l => {
+    const statusCls = l.completeness === 'full' ? 'ready' : 'partial';
+    const statusLbl = l.completeness === 'full' ? '✓ Vollständig' : `⚠ ${l.completenessPct}% bearbeitet`;
+    return `<button class="lemma-card" onclick="goView('detail',{lemmaId:'${l.id}'})">
+      <div class="lemma-card-top">
+        <div class="lemma-card-arab">${l.arab}</div>
+        <span class="lemma-card-status ${statusCls}">${statusLbl}</span>
+      </div>
+      <div>
+        <div class="lemma-card-name"><em>${l.name}</em></div>
+        <div class="lemma-card-trans">${l.coreTranslation}</div>
+      </div>
+      <div class="lemma-card-bar"><div class="lemma-card-bar-fill" style="width:${l.completenessPct}%"></div></div>
+      <div class="lemma-card-fields">${l.fields.map(f => `<span class="lemma-card-field">${f}</span>`).join('')}</div>
+    </button>`;
+  }).join('');
+}
+
+// === THEMEN ===
+function renderThemen() {
+  document.getElementById('themes-grid').innerHTML = themes.map(t => `
+    <div class="theme-card">
+      <div class="theme-head">
+        <h3 class="theme-title">${t.title}</h3>
+        <span class="theme-count">${t.lemmata.length} Lemmata</span>
+      </div>
+      <p class="theme-desc">${t.desc}</p>
+      <div class="theme-lemmata">${t.lemmata.map(lid => {
+        const l = lemmata[lid];
+        return `<button class="chip" onclick="goView('detail',{lemmaId:'${l.id}'})"><span class="ar">${l.arab}</span><span class="name">${l.name}</span><span class="desc">${l.coreTranslation}</span></button>`;
+      }).join('')}</div>
+    </div>`).join('');
+}
+
+// === LERNPFADE ===
+function renderPfade() {
+  document.getElementById('path-list').innerHTML = paths.map(p => `
+    <div class="path-card-large">
+      <div class="path-card-large-head">
+        <h3 class="path-card-title">${p.title}</h3>
+        <span class="theme-count">${p.sequence.length + p.extended.length} Stationen</span>
+      </div>
+      <p class="path-card-large-desc">${p.desc}</p>
+      <div class="path-card-large-flow">
+        ${p.sequence.map((lid, i) => {
+          const l = lemmata[lid];
+          const arrow = (i < p.sequence.length - 1 || p.extended.length > 0) ? '<span class="path-arrow">→</span>' : '';
+          return `<button class="path-node" onclick="goView('detail',{lemmaId:'${l.id}'})">${l.name}</button>${arrow}`;
+        }).join('')}
+        ${p.extended.map((ext, i) => {
+          const arrow = i < p.extended.length - 1 ? '<span class="path-arrow">→</span>' : '';
+          return `<span class="path-node" style="opacity:.6;">${ext}</span>${arrow}`;
+        }).join('')}
+      </div>
+    </div>`).join('');
+}
+
+// === MODUL RENDERN ===
+function renderModule(num, lemmaId) {
+  const m = moduleContent[lemmaId] && moduleContent[lemmaId][num];
+  if (!m) return '';
+  const titleMap = { 1:'Form und Erschließung', 2:'Kernbedeutung', 3:'Bedeutungsvarianten', 4:'Kulturhistorischer Kontext', 5:'Gebrauchspragmatik', 6:'Äquivalenz und Übersetzung', 7:'Beispiele und Szenarien', 8:'Vernetzung' };
+  const typeMap = { 1:'pflicht', 2:'pflicht', 3:'pflicht', 4:'option', 5:'option', 6:'option', 7:'option', 8:'option' };
+  return `<article class="mod-card" data-type="${typeMap[num]}" id="m${num}">
+    <div class="mod-head">
+      <div class="mod-head-left"><div class="mod-num">${num}</div><h3 class="mod-title">${titleMap[num]}</h3></div>
+      <span class="mod-badge ${typeMap[num]}">${typeMap[num] === 'pflicht' ? 'Pflicht' : 'Option'}</span>
+    </div>
+    <div class="mod-body">${m.html}</div>
+  </article>`;
+}
+
+// === DETAIL VIEW ===
+function renderDetail(lemmaId) {
+  const l = lemmata[lemmaId];
+  const otherLemmata = Object.values(lemmata).filter(x => x.id !== lemmaId);
+  const fieldsHtml = l.fields.map(f => `<button class="tag" onclick="goView('themen')">${f}</button>`).join('');
+  const completePctText = l.completeness === 'full' ? '' :
+    `<div class="lemma-status-bar"><div class="lsb-text">Dieser Eintrag ist im Bearbeitungsstand und wächst iterativ. Sichtbare „Zu liefern"-Boxen markieren, was noch beigebracht werden muss.</div><div class="lsb-progress"><div class="lsb-bar"><div class="lsb-bar-fill" style="width:${l.completenessPct}%"></div></div><span class="lsb-pct">${l.completenessPct}%</span></div></div>`;
+  const modulesHtml = [1,2,3,4,5,6,7,8].map(n => renderModule(n, lemmaId)).join('');
+  document.getElementById('detail-content').innerHTML = `
+    <div class="breadcrumb"><button onclick="goView('lexikon')">Lexikon</button><span class="sep">/</span><span>${l.name}</span></div>
+    ${completePctText}
+    <div class="with-aside">
+      <main>
+        <section class="hero">
+          <div class="hero-main">
+            <div class="hero-text">
+              <h1>${l.name}</h1>
+              <div class="pron">${l.pron} · ${l.grammar}</div>
+              <div class="hero-meta">${fieldsHtml}</div>
+            </div>
+            <div class="hero-arab">${l.arab}</div>
+          </div>
+          <div class="quick-stats">
+            <div class="qstat"><span class="qstat-label">Wurzel</span><span class="qstat-value"><span class="ar">${l.root}</span>${l.rootLatin}</span></div>
+            <div class="qstat"><span class="qstat-label">Kernbedeutung</span><span class="qstat-value">${l.coreTranslation}</span></div>
+            <div class="qstat"><span class="qstat-label">Verbalform</span><span class="qstat-value">${l.verbForm}</span></div>
+          </div>
+        </section>
+        <div class="toolbar">
+          <span class="toolbar-title">Module · 8</span>
+          <div class="filter-pills"><button class="active" onclick="setFilter('alle',this)">Alle</button><button onclick="setFilter('pflicht',this)">Nur Pflicht</button></div>
+        </div>
+        <div class="modules">${modulesHtml}</div>
+      </main>
+      <aside class="aside">
+        <div class="aside-card">
+          <div class="aside-title">Module · Sprungnavigation</div>
+          <ol class="nav-list">
+            <li><button onclick="document.getElementById('m1').scrollIntoView()"><span class="nav-num">1</span>Form & Erschließung<span class="nav-dot pflicht"></span></button></li>
+            <li><button onclick="document.getElementById('m2').scrollIntoView()"><span class="nav-num">2</span>Kernbedeutung<span class="nav-dot pflicht"></span></button></li>
+            <li><button onclick="document.getElementById('m3').scrollIntoView()"><span class="nav-num">3</span>Bedeutungsvarianten<span class="nav-dot pflicht"></span></button></li>
+            <li><button onclick="document.getElementById('m4').scrollIntoView()"><span class="nav-num">4</span>Kontext<span class="nav-dot"></span></button></li>
+            <li><button onclick="document.getElementById('m5').scrollIntoView()"><span class="nav-num">5</span>Gebrauchspragmatik<span class="nav-dot"></span></button></li>
+            <li><button onclick="document.getElementById('m6').scrollIntoView()"><span class="nav-num">6</span>Äquivalenz<span class="nav-dot"></span></button></li>
+            <li><button onclick="document.getElementById('m7').scrollIntoView()"><span class="nav-num">7</span>Beispiele<span class="nav-dot"></span></button></li>
+            <li><button onclick="document.getElementById('m8').scrollIntoView()"><span class="nav-num">8</span>Vernetzung<span class="nav-dot"></span></button></li>
+          </ol>
+        </div>
+        <div class="aside-card">
+          <div class="aside-title">Andere Lemmata</div>
+          <ol class="nav-list">
+            ${otherLemmata.map(o => {
+              const cls = o.completeness === 'full' ? '' : 'in-prog';
+              const pct = o.completeness === 'full' ? '' : `<span class="pct-tag">${o.completenessPct}%</span>`;
+              return `<li><button class="${cls}" onclick="goView('detail',{lemmaId:'${o.id}'})"><span class="nav-arab">${o.arab.charAt(0)}</span>${o.name}${pct}</button></li>`;
+            }).join('')}
+          </ol>
+        </div>
+      </aside>
+    </div>`;
+}
+
+function setFilter(mode, button) {
+  document.body.classList.remove('filter-alle', 'filter-pflicht');
+  document.body.classList.add('filter-' + mode);
+  button.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+  button.classList.add('active');
+}
+
+// === SEARCH ===
+function onSearch(q) {
+  const dropdown = document.getElementById('search-dropdown');
+  q = q.trim().toLowerCase();
+  let matches = Object.values(lemmata);
+  if (q.length > 0) matches = matches.filter(l => l.name.toLowerCase().includes(q) || l.coreTranslation.toLowerCase().includes(q) || l.arab.includes(q));
+  if (matches.length === 0) {
+    dropdown.innerHTML = '<div class="search-dropdown-empty">Keine Treffer</div>';
+  } else {
+    dropdown.innerHTML = matches.map(l => {
+      const note = l.completeness === 'full' ? '' : ` · ${l.completenessPct}% bearbeitet`;
+      return `<div class="search-item" onmousedown="goView('detail',{lemmaId:'${l.id}'});closeSearch();document.getElementById('search-input').value='';">
+        <span class="ar">${l.arab}</span>
+        <div class="search-item-meta">
+          <span class="search-item-name">${l.name}</span>
+          <span class="search-item-trans">${l.coreTranslation}${note}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  dropdown.classList.add('open');
+}
+function closeSearch() { document.getElementById('search-dropdown').classList.remove('open'); }
+
+goView('lexikon');
+</script>
+</body>
+</html>
